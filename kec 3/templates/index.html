@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>UAS KECERDASAN</title>
+</head>
+<body>
+<section>
+    <div class="container1">
+    <h1>PREDIKSI PENETASAN TELUR BEBEK METODE FUZZY</h1>
+    <h2>Oleh : </h2>
+    <p>1. Earnestine Immanuel Andrianto - 1462100024</p>
+    <p>2. Muhammad Fahmi Rosyad - 1462100159</p>
+    <p>3. Kelvin Aditya Kristofer - 1462100046</p>
+    </div>
+    <div class="container3">
+        <div class="isi">
+            <form id="speedForm">
+                <label  class="form-label" for="density">Traffic Density (0-500):</label>
+                <input class="form-control"  type="number" id="density" name="density" min="0" max="500" required>
+                <br><br>
+                <label class="form-label" for="distance">Distance to Vehicle in Front (0-100):</label>
+                <input class="form-control" type="number" id="distance" name="distance" min="0" max="100" required>
+                <br><br>
+                <button class="bntsimpan2" type="submit" >Hitung</button>
+            </form>
+        
+            <h4>Vehicle Speed: <span id="speed"></span></h4>
+           
+        
+            <script>
+                $(document).ready(function() {
+                    $("#speedForm").submit(function(e) {
+                        e.preventDefault();
+                        var density = $("#density").val();
+                        var distance = $("#distance").val();
+        
+                        $.ajax({
+                            type: "POST",
+                            url: "/calculate_speed",
+                            data: JSON.stringify({ "density": density, "distance": distance }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function(response) {
+                                $("#speed").text(response.speed);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+           
+    </div>
+    
+    <div class="container2">
+
+    </div>
+</section>
+    
+</body>
+</html>
